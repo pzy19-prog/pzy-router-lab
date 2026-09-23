@@ -1,0 +1,20 @@
+{
+  "design_status": "design_only_not_cli_output",
+  "case_id": "p0-001",
+  "task_id": "p0-001",
+  "receipt_kind": "actual_rules_cli_execution",
+  "receipt_file": "phase0-rules-receipt.json",
+  "rules_input_file": "data/phase0-p0-001-rules-input.json",
+  "prompt_fixture_id": "p0-001",
+  "association_rule": "case_id == task_id; receipt.input_digest is SHA-256 of the canonical Rules input file; prompt_fixture_id identifies task text separately and is never passed to Rules",
+  "benchmark_evidence": {
+    "router_run_status": "NOT_RUN",
+    "provisional_gold_status": "unreviewed_hypothesis",
+    "decision_accuracy": "UNKNOWN",
+    "executor_status": "NOT_RUN",
+    "task_success": "UNKNOWN",
+    "router_latency_ms": "UNKNOWN",
+    "end_to_end_latency_ms": "UNKNOWN",
+    "cost": "UNKNOWN"
+  }
+}

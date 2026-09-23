@@ -1,0 +1,31 @@
+{
+  "data_version": "phase0-synthetic-v1",
+  "protocol_version": "phase0-v2",
+  "freeze_scope": "development_and_protocol_validation_only",
+  "independent_test_eligible": false,
+  "files_sha256": {
+    "data/phase0-cases.jsonl": "b5a929d60a7da615451d80df894355ac755f54570011a0c74ba49462beb99e55",
+    "data/phase0-prompts.jsonl": "607f1184b057e6d78a019a481caf8ffcd32af8b6ca665452e52d1cc378cdbd2f",
+    "data/phase0-p0-001-rules-input.json": "495ac90fcfb89af58b94a5a60765c5d46641cd8146235b0e3bea2085345fc7f1"
+  },
+  "candidate_checkpoints": "PRE-REGISTRATION REQUIRED",
+  "adapter_versions": "PRE-REGISTRATION REQUIRED",
+  "checkpoint_language_coverage": {
+    "status": "PRE-REGISTRATION REQUIRED",
+    "required_case_languages": [
+      "en",
+      "zh"
+    ],
+    "rule": "Each assigned checkpoint must document support for every language label among its cases; mixed cases require verified support for all instructed languages."
+  },
+  "execution_environment_and_hardware": "PRE-REGISTRATION REQUIRED",
+  "budget_and_stop_conditions": "PRE-REGISTRATION REQUIRED",
+  "primary_metrics_and_acceptance_conditions": "PRE-REGISTRATION REQUIRED",
+  "sample_size_and_independent_test_split": "PRE-REGISTRATION REQUIRED",
+  "training_data_boundary": "No Router Lab training/fine-tuning is authorized; model pretraining corpora are not this experiment training split.",
+  "split_boundaries": {
+    "train": "NONE; no Router Lab training or fine-tuning authorized",
+    "dev": "all 12 public synthetic cases in phase0-synthetic-v1",
+    "independent_test": "PRE-REGISTRATION REQUIRED; create new, disjoint, sealed cases"
+  }
+}
