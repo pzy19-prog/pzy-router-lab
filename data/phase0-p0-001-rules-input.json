@@ -1,0 +1,12 @@
+{
+  "task_id": "p0-001",
+  "complexity": "low",
+  "sensitivity": "public",
+  "risk": "low",
+  "available_targets": [
+    "local_small",
+    "local_strong",
+    "cloud_strong"
+  ],
+  "allow_cloud": false
+}

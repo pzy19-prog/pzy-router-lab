@@ -1,0 +1,13 @@
+{
+  "contract_version": "routing-v0",
+  "policy_id": "rules-baseline-v0",
+  "task_id": "p0-001",
+  "input_digest": "e5ec068404ce2a2b271147f1e1d3b6b49c2e43e4661ac7f10eca44e3b3b2b0b8",
+  "selected_target": "local_small",
+  "reason_codes": [
+    "PREFERRED_LOCAL_TARGET"
+  ],
+  "fallback_target": "manual_review",
+  "requires_human_review": false,
+  "execution_performed": false
+}

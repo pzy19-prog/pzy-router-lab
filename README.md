@@ -32,7 +32,7 @@ The CLI emits a structured decision receipt only; it never calls or runs a targe
 4. **Least authority:** no writes to external repositories; no cross-project permission transfer.
 5. **Evidence before training:** reuse and compare established open-source baselines before considering fine-tuning.
 
-See [Phase 0 benchmark protocol](docs/benchmark-plan.md) and [routing schema](schemas/routing-v0.schema.json).
+See the [Phase 0 benchmark protocol](docs/benchmark-plan.md), [open-source selection report](docs/phase0-selection.md), [synthetic cases](data/phase0-cases.jsonl), and [routing schema](schemas/routing-v0.schema.json).
 
 ## Scope and status
 
