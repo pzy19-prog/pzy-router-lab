@@ -1,0 +1,1 @@
+{"task_id":"EXAMPLE-LOW-001","complexity":"low","sensitivity":"public","risk":"low","available_targets":["local_small","cloud_strong"],"allow_cloud":false}
