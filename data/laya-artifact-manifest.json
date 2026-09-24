@@ -1,0 +1,25 @@
+{
+  "repo": "convaiinnovations/laya-multilingual",
+  "revision": "82d57fc4f2d1be3d2caac494045f2ec51d0842f3",
+  "expected_files": [
+    {"path": ".gitattributes", "bytes": 1580, "evidence_status": "VERIFIED_METADATA"},
+    {"path": "README.md", "bytes": 8342, "evidence_status": "VERIFIED_METADATA"},
+    {"path": "encoder/config.json", "bytes": 1938, "evidence_status": "VERIFIED_METADATA"},
+    {"path": "model.safetensors", "bytes": 643835514, "evidence_status": "VERIFIED_METADATA", "upstream_lfs_sha256": "9d628fd971b700382ac6f65920a86f149777b2e748e0c955fb3b19695aa8f204"},
+    {"path": "rl_agent_config.json", "bytes": 472, "evidence_status": "VERIFIED_METADATA"},
+    {"path": "tokenizer/tokenizer.json", "bytes": 34363188, "evidence_status": "VERIFIED_METADATA", "upstream_lfs_sha256": "609d8f4c067cd3950f88594c5a802616cea245823836ef5848ee4fc40aab5b6f"},
+    {"path": "tokenizer/tokenizer_config.json", "bytes": 502, "evidence_status": "VERIFIED_METADATA"}
+  ],
+  "expected_total_bytes": 678211536,
+  "actual_files": null,
+  "actual_total_bytes": null,
+  "sha256": {"status": "UNKNOWN", "value": "NOT_ACQUIRED"},
+  "license_metadata": {
+    "code_license": {"value": "Apache-2.0", "status": "VERIFIED_METADATA", "source": "NandhaKishorM/laya@1e28ac20c0896b1c37a744cd11f740eb98f8b178/LICENSE"},
+    "model_card_license": {"value": "apache-2.0", "status": "VERIFIED_METADATA", "source": "Hub model metadata at exact revision"},
+    "legal_review": "NOT_PERFORMED"
+  },
+  "acquisition_status": "NOT_ACQUIRED",
+  "metadata_read_at": "2026-09-24",
+  "local_verification": "No checkpoint artifact has been acquired. Upstream LFS hashes and byte counts are metadata only and are not local artifact verification."
+}

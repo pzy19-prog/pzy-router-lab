@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pzy19-prog.github.io/pzy-router-lab/schemas/laya-artifact-manifest.schema.json",
+  "title": "Laya checkpoint artifact manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["repo", "revision", "expected_files", "expected_total_bytes", "actual_files", "actual_total_bytes", "sha256", "license_metadata", "acquisition_status"],
+  "properties": {
+    "repo": {"const": "convaiinnovations/laya-multilingual"},
+    "revision": {"const": "82d57fc4f2d1be3d2caac494045f2ec51d0842f3"},
+    "expected_files": {"type": "array", "items": {"type": "object", "required": ["path", "bytes", "evidence_status"], "properties": {"path": {"type": "string"}, "bytes": {"type": "integer", "minimum": 0}, "evidence_status": {"enum": ["VERIFIED_METADATA", "UPSTREAM_CLAIM", "UNKNOWN"]}, "upstream_lfs_sha256": {"type": ["string", "null"]}}, "additionalProperties": false}},
+    "expected_total_bytes": {"type": "integer", "minimum": 0},
+    "actual_files": {"type": ["integer", "null"], "minimum": 0},
+    "actual_total_bytes": {"type": ["integer", "null"], "minimum": 0},
+    "sha256": {"type": "object", "required": ["status", "value"], "properties": {"status": {"enum": ["UNKNOWN", "VERIFIED_LOCAL"]}, "value": {"type": "string"}}, "additionalProperties": false},
+    "license_metadata": {"type": "object", "required": ["code_license", "model_card_license", "legal_review"], "properties": {"code_license": {"type": "object"}, "model_card_license": {"type": "object"}, "legal_review": {"enum": ["NOT_PERFORMED", "REVIEWED"]}}, "additionalProperties": false},
+    "acquisition_status": {"enum": ["NOT_ACQUIRED", "ACQUIRED", "REJECTED"]},
+    "metadata_read_at": {"type": "string"},
+    "local_verification": {"type": "string"}
+  }
+}

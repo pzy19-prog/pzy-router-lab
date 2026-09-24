@@ -1,0 +1,21 @@
+{
+  "environment_id": "b0-wsl2-probe-2026-09-24",
+  "probed_at": "2026-09-24",
+  "python": {"version": "3.12.3", "dependency_mode": "stdlib-only for B0 code", "third_party_installed_by_this_change": false},
+  "dependency_manifest": {
+    "current_manifest": "data/laya-environment.json",
+    "current_lock_status": "NO_THIRD_PARTY_DEPENDENCIES_FOR_B0",
+    "candidate_upstream_runtime": {"status": "UPSTREAM_CLAIM", "source_commit": "1e28ac20c0896b1c37a744cd11f740eb98f8b178", "declared_dependencies": ["torch>=2.0.0", "transformers>=4.48.0", "safetensors>=0.4.0", "huggingface_hub>=0.20.0", "numpy>=1.20.0"]},
+    "static_runtime_path_review": {"status": "VERIFIED_METADATA", "finding": "Pinned laya/agent.py contains Hugging Face snapshot_download usage in its model load path; exact offline behavior was not executed. No paid provider/API call was found in the inspected loader files, but whole-package runtime behavior remains NOT_TESTED."},
+    "lock_strategy": "Before B1, produce an isolated Python 3.12 lock with exact transitive versions, hashes, platform markers and wheel provenance; review resource footprint; do not install or fetch it in B0. Prefer uv.lock or a hash-pinned requirements lock."
+  },
+  "wsl_kernel": "Linux PZY 6.18.33.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Fri Jun 5 01:12:21 UTC 2026 x86_64",
+  "cpu": {"model": "Intel Core i7-10750H CPU @ 2.60GHz", "logical_cpus": 12, "cores": 6},
+  "ram": {"total": "15 GiB", "available_at_probe": "12 GiB", "swap": "4 GiB"},
+  "gpu": {"name": "NVIDIA GeForce RTX 2060", "vram": "6144 MiB", "driver": "596.36", "nvidia_smi": "595.71.01", "cuda_reported": "13.2", "usage_at_probe": "533 MiB; Xwayland process visible"},
+  "disk": {"root_device": "/dev/sdd", "total": "1007 GiB", "used": "66 GiB", "available": "891 GiB", "experiment_disk_budget": "8 GiB (approved by Issue #7)"},
+  "effective_limits": {"cgroup_version": "v2 path reported by /proc/self/cgroup", "cpu_max": "UNAVAILABLE", "memory_max": "UNAVAILABLE", "memory_current": "UNAVAILABLE", "pids_max": "UNAVAILABLE", "host_wsl_caps": "UNKNOWN"},
+  "cache_policy": "B0 runner and adapter never use a model cache. Future B1 must set an explicit cache path beneath the approved experiment directory, deny network during use, and verify only the approved revision. Do not rely on ambient ~/.cache/huggingface contents.",
+  "network_policy": "B0 code performs no network access. Metadata-only upstream requests were made to Hugging Face and GitHub to verify identities and inspect source; no checkpoint/model file or package was downloaded. The upstream loader has a snapshot_download path, so any later execution must prove offline mode and use only the approved pre-acquired revision. LOAD/INFER remain unauthorized and unimplemented.",
+  "evidence_refs": ["python --version", "uname -a", "lscpu", "free -h", "df -h", "nvidia-smi", "/proc/self/cgroup", "/sys/fs/cgroup/* probes"]
+}

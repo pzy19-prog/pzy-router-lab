@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pzy19-prog.github.io/pzy-router-lab/schemas/decision-receipt.schema.json",
+  "title": "Router Lab B0 DecisionReceipt identity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["task_id", "input_digest", "routing_contract_version", "rules_config_identity", "config_identity", "config_digest", "candidate_engine", "candidate_source_commit", "checkpoint_repo", "checkpoint_revision", "checkpoint_artifact_hash", "adapter_version", "adapter_source_sha256", "runner_version", "runner_source_sha256", "environment_id", "execution_mode", "started_at", "completed_at", "decision", "status", "failure_class", "evidence_refs"],
+  "properties": {
+    "task_id": {"type": "string", "minLength": 1},
+    "input_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "routing_contract_version": {"const": "routing-v0"},
+    "rules_config_identity": {"type": "string"},
+    "config_identity": {"type": "string"},
+    "config_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "candidate_engine": {"const": "laya"},
+    "candidate_source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "adapter_source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "runner_source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "checkpoint_repo": {"const": "convaiinnovations/laya-multilingual"},
+    "checkpoint_revision": {"const": "82d57fc4f2d1be3d2caac494045f2ec51d0842f3"},
+    "checkpoint_artifact_hash": {"oneOf": [{"enum": ["UNKNOWN", "NOT_ACQUIRED"]}, {"type": "string", "pattern": "^[0-9a-f]{64}$"}]},
+    "adapter_version": {"type": "string"},
+    "runner_version": {"type": "string"},
+    "environment_id": {"type": "string"},
+    "execution_mode": {"type": "string"},
+    "started_at": {"type": ["string", "null"], "format": "date-time"},
+    "completed_at": {"type": ["string", "null"], "format": "date-time"},
+    "decision": {"enum": ["NOT_EVALUATED", "NOT_READY", "QUALIFIED_FOR_REVIEW", "PASS"]},
+    "status": {"enum": ["PREPARED", "NOT_READY", "QUALIFIED_FOR_REVIEW", "PASS"]},
+    "failure_class": {"enum": [null, "ARTIFACT_MISSING", "ARTIFACT_IDENTITY_MISMATCH", "ARTIFACT_MANIFEST_INVALID", "ARTIFACT_INTEGRITY_MISMATCH"]},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"decision": {"const": "NOT_EVALUATED"}}, "required": ["decision"]},
+      "then": {"properties": {"status": {"const": "PREPARED"}, "failure_class": {"const": null}}}
+    },
+    {
+      "if": {"properties": {"decision": {"const": "NOT_READY"}}, "required": ["decision"]},
+      "then": {
+        "properties": {
+          "status": {"const": "NOT_READY"},
+          "failure_class": {"enum": ["ARTIFACT_MISSING", "ARTIFACT_IDENTITY_MISMATCH", "ARTIFACT_MANIFEST_INVALID", "ARTIFACT_INTEGRITY_MISMATCH"]}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"decision": {"const": "QUALIFIED_FOR_REVIEW"}}, "required": ["decision"]},
+      "then": {"properties": {"status": {"const": "QUALIFIED_FOR_REVIEW"}, "failure_class": {"const": null}}}
+    },
+    {
+      "if": {"properties": {"decision": {"const": "PASS"}}, "required": ["decision"]},
+      "then": {"properties": {"status": {"const": "PASS"}, "failure_class": {"const": null}}}
+    },
+    {
+      "if": {"properties": {"decision": {"enum": ["QUALIFIED_FOR_REVIEW", "PASS"]}}, "required": ["decision"]},
+      "then": {
+        "properties": {
+          "checkpoint_artifact_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "config_digest": {"type": "string", "minLength": 1, "pattern": "^[0-9a-f]{64}$"},
+          "adapter_version": {"type": "string", "minLength": 1},
+          "adapter_source_sha256": {"type": "string", "minLength": 1, "pattern": "^[0-9a-f]{64}$"},
+          "runner_version": {"type": "string", "minLength": 1},
+          "runner_source_sha256": {"type": "string", "minLength": 1, "pattern": "^[0-9a-f]{64}$"},
+          "environment_id": {"type": "string", "minLength": 1},
+          "execution_mode": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "NOT_READY"}, "failure_class": {"const": "ARTIFACT_MISSING"}}, "required": ["status", "failure_class"]},
+      "then": {"properties": {"checkpoint_artifact_hash": {"enum": ["UNKNOWN", "NOT_ACQUIRED"]}}}
+    }
+  ]
+}
