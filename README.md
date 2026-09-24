@@ -10,7 +10,7 @@ A small, local-first benchmark scaffold for replaceable task-routing strategies.
 
 ## What is NOT implemented
 
-- Laya, RouteLLM, Jev, vLLM Semantic Router or other model adapters: **candidates for independent validation, not dependencies or installed features**.
+- Laya, RouteLLM, Jev, vLLM Semantic Router or other model execution: **not implemented**. A B0-only Laya identity/qualification seam exists, but no model adapter inference backend or runtime dependency is installed.
 - Runtime task execution, automatic retries, failure detection, feedback learning, custom model fine-tuning or full web UI.
 - Any empirical evidence that this baseline improves success, cost or latency.
 
@@ -33,6 +33,8 @@ The CLI emits a structured decision receipt only; it never calls or runs a targe
 5. **Evidence before training:** reuse and compare established open-source baselines before considering fine-tuning.
 
 See the [Phase 0 benchmark protocol](docs/benchmark-plan.md), [open-source selection report](docs/phase0-selection.md), [synthetic cases](data/phase0-cases.jsonl), and [routing schema](schemas/routing-v0.schema.json).
+
+See the [Phase 1 Stage B0 identity packet](docs/phase1-stage-b0.md) for the reviewed-scope Laya adapter/runner skeleton and artifact/environment manifests. It does not authorize checkpoint acquisition or inference.
 
 ## Scope and status
 
