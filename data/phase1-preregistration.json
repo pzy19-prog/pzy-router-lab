@@ -1,0 +1,337 @@
+{
+  "schema_version": "phase1-preregistration-v1",
+  "record_kind": "ROUTER_LAB_PHASE1_STAGE_A_PREREGISTRATION",
+  "status": "READY_FOR_SOL_REVIEW",
+  "execution_authorized": false,
+  "repository": "pzy19-prog/pzy-router-lab",
+  "branch": "phase1/preregistration",
+  "base_commit": "47a00d9135fd8c262e82d2a0a16f2ea25ca18372",
+  "issue": "https://github.com/pzy19-prog/pzy-router-lab/issues/3",
+  "as_of": "2026-09-24",
+  "scope": {
+    "stage": "A",
+    "purpose": "Freeze the proposed experiment protocol for independent review; no model evaluation is authorized.",
+    "prohibited": [
+      "Laya or RouteLLM inference",
+      "large model weight downloads",
+      "paid API calls",
+      "Jev rerun",
+      "fine-tuning",
+      "formal held-out result creation",
+      "performance conclusions",
+      "changes to Nexus, Relay, Forge, PCT, or Playbook",
+      "push or merge"
+    ],
+    "dev_data": "All Phase 0 cases and prompts remain public dev/protocol-validation data only."
+  },
+  "research_question": {
+    "primary_research_question": "On a newly generated, independently sealed test set, does a frozen local-first semantic routing configuration improve task outcome success over the deterministic Rules baseline while preserving policy invariants and staying within an independently approved resource and cost budget? If no candidate meets feasibility or evidentiary requirements, report insufficient evidence or candidate not feasible rather than infer an advantage.",
+    "tracks": {
+      "controlled_routing_comparison": {
+        "purpose": "Compare decision behavior under the same router-visible information and availability conditions.",
+        "allowed_router_input": [
+          "case_id/task_id",
+          "complexity",
+          "sensitivity",
+          "risk",
+          "available_targets",
+          "allow_cloud",
+          "frozen scenario/availability state only where every included method consumes the same value"
+        ],
+        "task_prompt_visible_to_router": false,
+        "comparison_objects": [
+          "Rules baseline",
+          "only candidate adapters that accept an identical canonical metadata payload without extra prompt-derived fields"
+        ],
+        "eligibility": "No candidate adapter is presumed eligible. If the shared serialized input contract cannot be demonstrated, it is excluded from this track.",
+        "allowed_conclusions": [
+          "router decision distribution and correctness against verified routing gold",
+          "policy invariant behavior",
+          "router-only latency under the pinned environment"
+        ],
+        "prohibited_conclusions": [
+          "task answer quality or task outcome success from decision labels",
+          "equal-information algorithm comparison where actual inputs differ",
+          "general model quality"
+        ]
+      },
+      "end_to_end_system_comparison": {
+        "purpose": "Compare whole frozen router-adapter-executor configurations on the same task fixtures and outcome rubric.",
+        "allowed_input": "Each configured router and adapter may consume only its documented, pinned supported inputs; task text can be provided to components that actually support it. Rules receives metadata only; its executor receives the task prompt after routing.",
+        "comparison_objects": [
+          "Rules + pinned executor/fallback behavior",
+          "each independently reviewed router + adapter + executor configuration that passes license, safety, and feasibility gates"
+        ],
+        "required_reporting": "List actual router and executor inputs, mappings, adapter identity, and model pair for every configuration.",
+        "allowed_conclusions": [
+          "system-level blinded task outcomes",
+          "system-level escalation/fallback behavior",
+          "router and end-to-end latency",
+          "measured local resource use and applicable token/API cost"
+        ],
+        "prohibited_conclusions": [
+          "router-only causal advantage when executor/configuration/input differences remain",
+          "universal model quality or production value beyond the tested configurations"
+        ]
+      },
+      "separation": "Tracks are analyzed and reported separately; no metric is transferred between tracks."
+    }
+  },
+  "data_plan": {
+    "phase0_disposition": "dev_only_not_heldout",
+    "formal_heldout_created": false,
+    "heldout_creation_status": "PROTOCOL_ONLY_PENDING_DATA_OWNER_AND_SOL_REVIEW",
+    "generation_method": {
+      "source_frame": "PRE_REGISTRATION_REQUIRED: data owner must identify target task population, strata, inclusion/exclusion criteria, and source/authoring method before case production.",
+      "procedure": [
+        "Freeze population, task-family/language/risk strata, sampling or authoring quotas, rubrics, and generator version before generating cases.",
+        "A data custodian who does not implement or tune candidate routers creates or samples new cases after adapters and configurations are frozen.",
+        "Do not copy, paraphrase, relabel, or select from Phase 0 fixtures; do not use model outputs to author or filter cases.",
+        "Use only authorized, de-identified or purpose-authored content; record provenance and rights for each case.",
+        "Complete overlap/leakage review before sealing."
+      ],
+      "sample_count": "PRE_REGISTRATION_REQUIRED / NOT YET JUSTIFIED"
+    },
+    "split_and_access": {
+      "dev": "Existing 12 public Phase 0 cases/prompts; available for protocol validation and adapter development only.",
+      "independent_test": "New cases only, disjoint IDs and content; held by an independent custodian in a private access-controlled location, never committed to this public repository before evaluation.",
+      "train": "None authorized; no training, fine-tuning, threshold tuning, or calibration in this experiment.",
+      "separation": "Router implementers and configuration selectors do not receive held-out prompts, labels, or per-case digests before final configuration lock. The custodian logs access. Independent adjudicators do not see router identity/output when labeling gold."
+    },
+    "leakage_prevention": [
+      "Keep held-out contents and unsalted content hashes outside the public repository and away from adapter/configuration authors until the run is locked.",
+      "Check exact and normalized-text overlap against Phase 0 and any declared source benchmark; use semantic/manual review for likely paraphrase overlap.",
+      "Record known source benchmark contamination and model-pretraining uncertainty; do not claim pretraining leakage is fully detectable.",
+      "No held-out inspection, prompt editing, example selection, or threshold adjustment after any candidate output is seen.",
+      "Any post-unseal change to case, rubric, adapter, prompt template, threshold, or model configuration invalidates that test version for confirmatory use and requires a newly generated version plus review."
+    ],
+    "identity_and_seal": {
+      "case_id": "Random opaque UUID assigned once by custodian; stable across tracks, not content-derived, never reused across splits.",
+      "prompt_digest": "SHA-256 of the exact UTF-8 task_input bytes as stored in the sealed record; normalization/line-ending policy is fixed before generation and recorded.",
+      "input_digest": "SHA-256 of canonical UTF-8 JSON for the exact router payload (sorted keys, compact separators, ensure_ascii=false); keep separate digests for each track/configuration payload. Do not pass the task prompt to Controlled routers.",
+      "sealed_manifest": "Store dataset version, generation procedure/version, split, case IDs, file-level and per-case digest, rubric version, access-control record, and creation timestamp in a signed/append-only private manifest. Publish only a commitment that does not expose recoverable prompt hashes before unseal.",
+      "unseal": "Custodian releases cases to the frozen runner only after Sol review and all hard gates are satisfied; record exact sealed-manifest digest and unseal event in the run receipt."
+    },
+    "gold_and_blinding": {
+      "routing_gold": "At least two independent adjudicators review the frozen routing policy and permitted metadata without router outputs or execution outcomes. They label independently; a third adjudicator resolves disagreement. Store rubric/version, individual labels, adjudicated label, rationale, and disagreement.",
+      "task_outcome_gold": "For executable cases, use a frozen itemized rubric and fixed executor. Reviewers see anonymized outputs, not router/system identity, route decision, or attempt history where that history is not required to score the rubric. Two reviewers score independently; a third resolves disagreement.",
+      "unknown": "If policy or output evidence is insufficient or adjudicators cannot resolve a label, preserve UNKNOWN with reason. Never force a label or silently remove the case. Report unknown/unscorable counts and rates."
+    },
+    "unknown_handling": {
+      "analysis": "Intention-to-treat by assigned case. Technical failure, abstention, escalation, or fallback remains an observed result and is not dropped.",
+      "decision_accuracy": "UNKNOWN gold is excluded from the scorable accuracy numerator and denominator, with eligible, scored, and UNKNOWN counts/rates reported separately.",
+      "task_success": "A valid judged output that fails any required rubric item is failure. Missing/corrupt output is task failure if attributable to the system; otherwise outcome is UNKNOWN with reason and retained in the flow accounting.",
+      "policy_unknown": "Unknown risk or sensitivity must follow the frozen fail-closed policy; a missing policy input is reported and is not recoded as safe."
+    }
+  },
+  "sample_size_and_statistics": {
+    "design": "Paired case-level comparison on the same sealed cases; report raw counts and paired differences. Stratify descriptive results by predeclared task/language/risk strata.",
+    "sample_size_rationale": "A defensible n requires a target effect or precision objective, expected paired discordance/variance, outcome prevalence, alpha, power, multiplicity plan, and clustering/strata assumptions. No suitable independent pilot variance or target effect is currently available; the 12 exposed dev cases cannot justify n.",
+    "candidate_primary_test": "For binary paired case outcomes, exact McNemar is a candidate test; Sol must accept the test and preregister alpha/power or precision target. Calculate n from a justified minimally meaningful paired difference and discordant-pair rate, with sensitivity analysis over plausible discordance rates. These inputs are currently unavailable.",
+    "sample_size": "PRE_REGISTRATION_REQUIRED / NOT YET JUSTIFIED",
+    "non_inferiority_margin": "PRE_REGISTRATION_REQUIRED / NOT YET JUSTIFIED",
+    "acceptance_threshold": "PRE_REGISTRATION_REQUIRED / NOT YET JUSTIFIED",
+    "statistical_test_and_alpha": "PRE_REGISTRATION_REQUIRED / NOT YET JUSTIFIED",
+    "confidence_interval_method": "PRE_REGISTRATION_REQUIRED / NOT YET JUSTIFIED",
+    "multiple_comparison_plan": "PRE_REGISTRATION_REQUIRED / NOT YET JUSTIFIED",
+    "interpretation": "No statistical pass/fail, superiority, or non-inferiority claim until Sol independently accepts the target parameters and they are frozen before unsealing."
+  },
+  "metrics": {
+    "controlled_primary": "Decision correctness against adjudicated verified routing gold, only for cases with non-UNKNOWN gold and only if candidate passes identical-input eligibility.",
+    "end_to_end_primary": "Blinded task outcome success rate over executable independent-test cases under intention-to-treat accounting.",
+    "secondary": [
+      {
+        "name": "decision_correctness",
+        "unit": "correct decisions / scorable decisions; percentage and raw counts",
+        "aggregation": "per system and predeclared strata; paired case difference",
+        "unknown": "UNKNOWN gold excluded from scorable denominator and reported separately",
+        "tracks": ["Controlled", "End-to-End"]
+      },
+      {
+        "name": "task_outcome_success",
+        "unit": "rubric-passing tasks / executable assigned tasks; percentage and raw counts",
+        "aggregation": "per system and predeclared strata; paired case difference",
+        "unknown": "Missing/corrupt system output is failure if attributable; otherwise UNKNOWN and shown in flow counts",
+        "tracks": ["End-to-End"]
+      },
+      {
+        "name": "abstain_escalation_correctness",
+        "unit": "correct abstain/escalate decisions / cases where verified policy gold requires or permits that action",
+        "aggregation": "counts, rate, and paired case difference",
+        "unknown": "UNKNOWN gold unscorable; report count/rate",
+        "tracks": ["Controlled", "End-to-End"]
+      },
+      {
+        "name": "over_escalation",
+        "unit": "unnecessary escalation/abstention decisions / cases whose verified gold permits an automated available route",
+        "aggregation": "count and rate; paired case difference",
+        "unknown": "UNKNOWN gold excluded from denominator and reported",
+        "tracks": ["Controlled", "End-to-End"]
+      },
+      {
+        "name": "router_latency",
+        "unit": "milliseconds per decision call",
+        "aggregation": "raw per-call values and per-case median; cold start/load/first-call reported separately",
+        "unknown": "missing timing is UNKNOWN; do not impute",
+        "tracks": ["Controlled", "End-to-End"]
+      },
+      {
+        "name": "end_to_end_latency",
+        "unit": "milliseconds per assigned task, with router/executor components where measurable",
+        "aggregation": "raw values and per-case median; queue/human wait shown separately",
+        "unknown": "not applicable when no execution occurs; missing measurement is UNKNOWN",
+        "tracks": ["End-to-End"]
+      },
+      {
+        "name": "local_resource_usage",
+        "unit": "peak resident RAM MiB, peak VRAM MiB, CPU-seconds, and process load time",
+        "aggregation": "per run/configuration with measurement tool and sampling interval; report maxima and raw samples",
+        "unknown": "unmeasured resource is UNKNOWN; no inference from parameter count",
+        "tracks": ["Controlled", "End-to-End"]
+      },
+      {
+        "name": "api_token_cost",
+        "unit": "input/output tokens and currency per case and total, when an authorized API is used",
+        "aggregation": "provider-reported usage and dated price source; router calls included",
+        "unknown": "not applicable for fully local configurations; missing provider usage/cost is UNKNOWN, not zero",
+        "tracks": ["End-to-End"]
+      },
+      {
+        "name": "fallback_behavior",
+        "unit": "fallback events / assigned decisions, with failure class and attempt count",
+        "aggregation": "counts and rates by predefined failure class; preserve every attempt in order",
+        "unknown": "unclassifiable cause is UNKNOWN and retained",
+        "tracks": ["Controlled", "End-to-End"]
+      },
+      {
+        "name": "unknown_rate",
+        "unit": "UNKNOWN or unscorable labels / assigned cases, separately by source (gold, output, runtime, cost, identity)",
+        "aggregation": "counts and rates by system, metric, and predeclared stratum",
+        "unknown": "UNKNOWN is counted as the metric value; never silently dropped",
+        "tracks": ["Controlled", "End-to-End"]
+      }
+    ],
+    "policy_invariants": [
+      "confidential input is never sent to a cloud target",
+      "unavailable target is never reported as executable",
+      "unknown/high-risk policy inputs fail closed or escalate per frozen policy"
+    ],
+    "invariant_failure": "Any observed violation halts the affected run immediately and is reported; it cannot be averaged against quality gains."
+  },
+  "candidates": [
+    {
+      "name": "Rules",
+      "role": "mandatory deterministic baseline",
+      "repo": "pzy19-prog/pzy-router-lab",
+      "code_commit_candidate": "47a00d9135fd8c262e82d2a0a16f2ea25ca18372",
+      "code_license": "MIT",
+      "checkpoint": "NONE",
+      "adapter_status": "Native routing-v0 implementation; benchmark adapter/version still must be identified in the run manifest."
+    },
+    {
+      "name": "Laya",
+      "role": "first local semantic candidate, subject to independent eligibility review",
+      "repo": "https://github.com/NandhaKishorM/laya",
+      "code_commit_candidate": "1e28ac20c0896b1c37a744cd11f740eb98f8b178",
+      "release_candidate": "No release selected; exact main HEAD is pinned as a source candidate only.",
+      "code_license": "Apache-2.0 (GitHub metadata at read time)",
+      "checkpoint_repo": "https://huggingface.co/convaiinnovations/laya-multilingual",
+      "checkpoint_revision_candidate": "82d57fc4f2d1be3d2caac494045f2ec51d0842f3",
+      "checkpoint_license": "Apache-2.0 declared in Hugging Face model metadata; full model-card terms and exact artifact hash still require review before any download/use.",
+      "adapter_status": "NOT_IMPLEMENTED; current contract mapping and identical-input Controlled eligibility UNKNOWN.",
+      "checkpoint_status": "Metadata identified and revision pinned as candidate; no weights downloaded; artifact hash/runtime load unverified.",
+      "chinese_support": "Model metadata lists zh; task-specific routing quality UNKNOWN.",
+      "cpu_local_feasibility": "UNKNOWN; not installed or run."
+    },
+    {
+      "name": "RouteLLM",
+      "role": "conditional comparison candidate; not admitted to formal evaluation yet",
+      "repo": "https://github.com/lm-sys/RouteLLM",
+      "code_commit_candidate": "0b64fdafe049e596a3f5657c219329f24af24198",
+      "release_candidate": "No release selected; exact main HEAD is pinned as a source candidate only.",
+      "code_license": "Apache-2.0 (GitHub metadata at read time)",
+      "checkpoint_repo": "NONE_SELECTED",
+      "checkpoint_revision_candidate": "UNKNOWN",
+      "checkpoint_license": "UNKNOWN; must verify each exact router and strong/weak model artifact separately.",
+      "adapter_status": "NOT_IMPLEMENTED; architecture expects prompt/model-pair semantics and may require embeddings/API configuration; eligibility UNKNOWN.",
+      "checkpoint_status": "No checkpoint selected, downloaded, or evaluated.",
+      "chinese_support": "UNKNOWN for this task and any future fixed model pair.",
+      "cpu_local_feasibility": "UNKNOWN for the complete router, embedding path, and executor configuration."
+    },
+    {
+      "name": "vLLM Semantic Router",
+      "role": "optional reference only; inclusion requires separate justification",
+      "repo": "https://github.com/vllm-project/semantic-router",
+      "code_commit_candidate": "3448de83f093f2108505cf2902a0602de8929d20",
+      "release_candidate": "No release or recipe selected; exact main HEAD is pinned as a source candidate only.",
+      "code_license": "Apache-2.0 (GitHub metadata at read time)",
+      "checkpoint_repo": "NONE_SELECTED",
+      "checkpoint_revision_candidate": "UNKNOWN",
+      "checkpoint_license": "UNKNOWN until a specific recipe and model are named.",
+      "adapter_status": "NOT_IMPLEMENTED; full gateway/wire integration likely differs from routing-v0; Controlled eligibility UNKNOWN.",
+      "checkpoint_status": "No checkpoint/recipe selected or downloaded.",
+      "chinese_support": "UNKNOWN for a specific frozen recipe.",
+      "cpu_local_feasibility": "Router code advertises CPU paths; complete pinned recipe and end-to-end local feasibility UNKNOWN."
+    }
+  ],
+  "environment": {
+    "observed_at": "2026-09-24",
+    "os": "Linux x86_64 under WSL2; kernel 6.18.33.1-microsoft-standard-WSL2",
+    "python": "3.12.3",
+    "cpu": "Intel Core i7-10750H, 6 cores / 12 threads reported by lscpu",
+    "ram": "16,284,284 kB total reported by /proc/meminfo (~15.5 GiB); availability varies by process/session",
+    "gpu": "NVIDIA GeForce RTX 2060, 6,144 MiB; nvidia-smi driver 596.36",
+    "execution_environment_identity": "Host identity beyond the reported WSL kernel/CPU/GPU is not uniquely attested. Capture OS build, WSL distribution/version, driver, CPU affinity, memory limit, environment/container digest, and UTC timestamp in the actual run receipt.",
+    "dependency_environment_plan": "Use an isolated locked Python environment and record lockfile digest, Python build, OS packages, CUDA/runtime libraries, environment variables relevant to device/thread behavior, and installation provenance. Exact dependency lock is PRE_REGISTRATION_REQUIRED before Stage B.",
+    "runner_identity": "No benchmark runner exists. Runner commit and version are PRE_REGISTRATION_REQUIRED before Stage B; bind to exact Git commit and dirty-tree state in receipts.",
+    "hardware_capture_method": "Observed using uname, python --version/platform, lscpu, /proc/meminfo, and nvidia-smi. Hardware virtualization/resource caps can differ from physical host; verify effective limits at execution time."
+  },
+  "budget_and_stops": {
+    "paid_api_budget": "0; fixed",
+    "stage_a_model_downloads": 0,
+    "stage_a_model_inference_calls": 0,
+    "future_max_model_downloads": "PRE_REGISTRATION_REQUIRED; Sol must approve exact number of checkpoint artifacts and per-artifact/aggregate byte caps before any download.",
+    "future_max_disk_use": "PRE_REGISTRATION_REQUIRED; human confirmation required after candidate artifact sizes and available storage are known.",
+    "future_max_wall_clock": "PRE_REGISTRATION_REQUIRED; human confirmation required before evaluation.",
+    "future_max_benchmark_reruns": "PRE_REGISTRATION_REQUIRED; human confirmation required; no benchmark run is authorized in Stage A.",
+    "failure_stops": [
+      "Any confidential-to-cloud transfer, unavailable-target selection, or other frozen safety invariant violation: stop affected run immediately.",
+      "Any paid API call or non-zero charge: stop immediately; this phase budget is zero.",
+      "Missing/mismatched case, prompt, input, candidate, environment, or receipt identity: stop and preserve the run as invalid/incomplete.",
+      "Missing license grant or unsupported language/input capability: exclude the candidate; do not silently substitute another checkpoint.",
+      "Any held-out exposure before configuration lock, or any post-unseal tuning: invalidate that held-out version and stop confirmatory claims.",
+      "Exceeding any later Sol-approved download, disk, wall-clock, call, or rerun cap: stop immediately."
+    ],
+    "environment_incompatibility_stop": "If a pinned candidate cannot install/load/run in the approved environment or requires unregistered network services, record candidate not feasible and stop that candidate; do not change hardware, checkpoint, dependencies, or track silently. A changed environment requires a new reviewed preregistration version.",
+    "same_root_repair_stop": "At most one bounded repair attempt for an identified root cause. If the same root cause recurs after that repair, stop implementation/evaluation for that candidate and return for review; a new issue name or test does not reset this local cap.",
+    "rerun_semantics": "Per-case repeated inference/timing replicates are distinct from full benchmark reruns; exact replicate counts and any rerun cap must be approved before Stage B."
+  },
+  "playbook_preflight": {
+    "record": "docs/playbook-preflight.md",
+    "source_repo": "pzy19-prog/ai-native-project-playbook",
+    "source_read_head": "1ad5d2c76b1cdec97032e6c71d553770512c7555",
+    "authority_state": "NO_ADOPTED_CURRENT_RULES",
+    "accepted_control": "REBASELINE_01_CONTROL_BASELINE",
+    "topics": {
+      "exact_evidence_subject_binding": "NOT_APPLICABLE",
+      "pass_vs_proof_target": "NOT_APPLICABLE",
+      "threshold_freeze_anti_ratcheting": "NOT_APPLICABLE",
+      "repair_loop_stops": "NOT_APPLICABLE",
+      "source_runtime_environment_receipt_identity": "NOT_APPLICABLE"
+    },
+    "material_design_change": "No experiment design/verification rule was changed by an adopted Current rule. The accepted control baseline changed only authority framing: drafts/candidates remain non-normative and passing deterministic checks is not described as proof of study validity or model performance."
+  },
+  "review_gates": {
+    "independent_sol_review_required": true,
+    "review_target": "This exact Stage A commit and its manifest/schema/tests.",
+    "must_resolve_before_stage_b": [
+      "sample size, statistical test, alpha/power or precision target, multiplicity plan",
+      "non-inferiority margin and acceptance threshold or explicit decision to use no confirmatory pass threshold",
+      "independent-test sampling frame, strata, sample count, custodian and access controls",
+      "candidate inclusion, exact adapter/configuration/executor and complete checkpoint/license review",
+      "dependency lock, runner identity, environment limits and hardware feasibility",
+      "download count/byte cap, disk cap, wall-clock cap and benchmark rerun cap"
+    ],
+    "stage_b_eligibility": "false until independent Sol review accepts the exact subject and each PRE_REGISTRATION_REQUIRED item is resolved or explicitly waived in a versioned review decision."
+  }
+}
