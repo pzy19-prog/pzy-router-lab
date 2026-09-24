@@ -1,0 +1,172 @@
+{
+  "schema_version": "phase1-pre-execution-gate-v1",
+  "record_kind": "ROUTER_LAB_PHASE1_PRE_EXECUTION_GATE",
+  "status": "PRE_EXECUTION_GATE_READY_FOR_REVIEW",
+  "execution_authorized": false,
+  "repository": "pzy19-prog/pzy-router-lab",
+  "branch": "phase1/pre-execution-gate",
+  "base_commit": "6e10cb1b2d5332180e748f8ddfa141bdecc69abc",
+  "issue_5": "https://github.com/pzy19-prog/pzy-router-lab/issues/5",
+  "issue_3": "https://github.com/pzy19-prog/pzy-router-lab/issues/3",
+  "as_of": "2026-09-24",
+  "fresh_read": {
+    "main_commit": "6e10cb1b2d5332180e748f8ddfa141bdecc69abc",
+    "current_branch_commit": "6e10cb1b2d5332180e748f8ddfa141bdecc69abc",
+    "worktree_initially_clean": true,
+    "issue_5_status": "OPEN; latest body read 2026-09-24",
+    "issue_3_status": "OPEN; latest body read 2026-09-24",
+    "phase0_design": "docs/phase0-selection.md and docs/benchmark-plan.md reread; synthetic cases remain dev-only",
+    "playbook_preflight": "docs/playbook-preflight.md reread; no adopted current experiment rules beyond the accepted authority-boundary control"
+  },
+  "claim_hierarchy": {
+    "formal_inferential_benchmark": "NOT_YET_JUSTIFIED",
+    "pilot_type": "NON-INFERENTIAL PILOT",
+    "pilot_scope": "After independent authorization only: adapter/load/runtime feasibility on public Phase 0 dev fixtures. It may report operational feasibility observations only; it must not report performance advantage, superiority, non-inferiority, acceptance/pass thresholds, or confirmatory claims.",
+    "tracks": {
+      "A_controlled_routing_comparison": {
+        "primary_claim": "For cases with verified routing gold and identical eligible router-visible metadata, report each frozen system's decision-correctness counts and paired case-level differences versus Rules. This is descriptive only until a separately justified inferential design is approved.",
+        "primary_metric": "decision correctness = exact correct decisions / assigned cases with verified non-UNKNOWN routing gold",
+        "secondary_metrics": ["abstain/escalation correctness", "over-escalation", "router latency", "fallback/failure-class counts", "policy invariant violations", "UNKNOWN rate", "measured RAM/VRAM/CPU"],
+        "paired_case_semantics": "Same case ID, same canonical serialized metadata and availability state for every included router. Exclude a router from Track A if identical input cannot be shown. Pair differences are case-wise; no independent-sample comparison.",
+        "inferential_method_boundary": "Binary paired primary outcome: exact McNemar may be considered only after Sol approves the claim, alpha, sample size assumptions and missingness rule. Multiclass decision labels: report confusion matrices and per-class counts descriptively; no unapproved chi-square or class-wise tests. Continuous latency/resource measures: report raw paired observations and descriptive paired differences/medians; no unapproved t-test, rank test, interval, or tail claim."
+      },
+      "B_end_to_end_system_comparison": {
+        "primary_claim": "For executable assigned cases scored blind under a frozen rubric, report system-level task-outcome counts and paired differences versus the frozen Rules-plus-executor configuration. Descriptive only until a separately justified inferential design is approved.",
+        "primary_metric": "task outcome success = rubric-passing outputs / executable cases assigned to the system, with system-attributable output failures counted as failures",
+        "secondary_metrics": ["abstain/escalation and fallback counts", "router and end-to-end latency", "resource use", "applicable token/currency cost", "UNKNOWN rate", "policy invariant violations"],
+        "paired_case_semantics": "Systems receive the same case ID and rubric; each may receive only its pinned adapter-supported inputs. Pair case outcomes, but interpret as whole-system differences. Do not attribute differences to router alone when input, adapter, executor, or model pair differs.",
+        "inferential_method_boundary": "Binary paired outcome: exact McNemar may be considered only after preregistration and Sol review. Multiclass outcome/failure classes: descriptive counts and confusion tables only. Continuous latency/resource/cost: raw paired case values and descriptive summaries only. No inferential test or acceptance threshold is currently authorized."
+      }
+    },
+    "sample_size": "NOT_YET_JUSTIFIED: no target effect/precision objective, expected discordance or variance, outcome prevalence, alpha, power, multiplicity family, strata/clustering assumptions, or expected unscorable rate is supported by independent evidence. Phase 0's 12 exposed synthetic dev cases cannot justify formal n.",
+    "alpha_power_and_thresholds": "NOT_YET_JUSTIFIED; no alpha, power, effect size, non-inferiority margin, acceptance threshold, or confirmatory confidence interval is invented or approved.",
+    "unknown_denominator_rule": "Assigned cases remain in flow accounting. For an outcome-specific metric, exclude only cases whose gold/measurement is genuinely UNKNOWN from that metric's scorable denominator; publish assigned, eligible, scored, UNKNOWN, and failure counts and rates. System-attributable missing/corrupt output is failure. Non-system missing evidence is UNKNOWN, retained in flow counts. Never recode UNKNOWN as success or safe.",
+    "multiplicity": "No secondary metric is confirmatory. Secondary metrics and strata are descriptive only; no multiplicity correction is claimed or needed for descriptive reporting. Before any inferential secondary claim, Sol must freeze the test family and correction procedure; otherwise label exploratory/descriptive.",
+    "descriptive_only": ["all pilot observations", "all secondary metrics", "all strata/subgroups", "multiclass class-level comparisons", "continuous latency/resource/cost summaries", "any comparison using provisional or UNKNOWN gold", "all Track B differences where system components differ"]
+  },
+  "heldout_governance": {
+    "formal_heldout_created": false,
+    "formal_heldout_content_present": false,
+    "status": "PROTOCOL_ONLY; population quotas, exact sample count, named data owner and unseal authorization await independent review",
+    "custodian_role": "HELDOUT_CUSTODIAN: a named person appointed by the data owner, independent of router/adapter/executor implementation, tuning, and candidate selection. If one person cannot satisfy the separation, a separate data owner must appoint and audit the role.",
+    "access": {
+      "may_see_content": ["HELDOUT_CUSTODIAN", "authorized case authors while authoring", "independent route-gold adjudicators for route cases assigned to them", "independent outcome adjudicators for anonymized output and the minimum task context required to score", "frozen runner process only after written unseal authorization; no interactive implementer access"],
+      "must_not_see_content_before_unseal": ["router/adapter implementers", "candidate and configuration selectors", "benchmark operators outside the frozen runner", "public repository readers"],
+      "implementer_after_unseal": "No direct prompt, label, per-case digest, or result access until all systems and configs are irreversibly locked; any exposure/change retires that heldout version for confirmatory use.",
+      "reviewer_visibility": "Independent reviewer may inspect protocol, role assignments, access logs, commitment and non-revealing manifest fields. Prompt bytes and per-case prompt digests stay sealed until authorized unseal."
+    },
+    "population": "Newly authored or lawfully sampled, de-identified English and Chinese task requests representative of the Router Lab's explicitly declared local-first routing use cases; exclude confidential/private source text unless separately authorized and protected. Population definition requires data-owner and Sol review before generation.",
+    "strata": ["language: zh, en, mixed only when both languages are supported", "task family: structured transformation, information extraction/classification, short-form reasoning/response; exact families to be confirmed from target population", "policy/risk: ordinary, elevated, high-risk/manual-review", "execution mode: policy-only versus executor-required"],
+    "sample_frame": "Purpose-authored cases or an approved, rights-cleared source frame frozen before generation; no Phase 0 case, paraphrase, benchmark item, or model-output-derived item. Exact source, quotas, sample count, inclusion/exclusion criteria, and rights remain NOT_YET_JUSTIFIED and require approval before generation.",
+    "generation_protocol": ["Freeze population, strata, quotas, inclusion/exclusion criteria, language policy, scoring rubrics, executor/model identities and authoring recipe before case creation.", "Custodian generates or samples cases only after adapter/configuration lock; candidate outputs may not be used to author, filter, rewrite or select cases.", "Record provenance, rights, authoring method/version, timestamps, inclusion decisions and contamination review for every case.", "Assign one random opaque UUID per case; never derive IDs from content or reuse IDs across splits.", "Store prompt bytes as exact UTF-8 with a declared LF policy. Compute prompt SHA-256 over exact bytes and router-input SHA-256 over canonical UTF-8 JSON (sorted keys, compact separators, ensure_ascii=false); keep digests private until unseal."],
+    "sealing": "Store prompt, labels, per-case digests and access events in a private access-controlled store. Create a signed or append-only manifest with dataset version, case UUIDs, generation/source details, rubric and protocol versions, file-level and per-case digests, timestamps and access log. Publish only a non-revealing commitment before evaluation. Never commit formal heldout content or its per-case prompt digests to this repository.",
+    "manifest_fields": ["dataset_version", "protocol_version", "population_and_strata_version", "generation_recipe_and_version", "case_uuid", "source_provenance_and_rights", "prompt_digest_private", "router_input_digest_private_by_track_and_config", "rubric_version", "file_digest", "created_at", "custodian_identity_and_role", "access_events", "seal_commitment", "unseal_authorization_and_timestamp"],
+    "case_id": "Random opaque UUIDv4 allocated by custodian once; independent of prompt contents; no reuse across splits.",
+    "digests": {"prompt": "SHA-256 exact UTF-8 prompt bytes with frozen line endings", "router_input": "SHA-256 canonical UTF-8 JSON (sorted keys, compact separators, ensure_ascii=false) for the actual per-track/per-adapter payload; Controlled payload excludes task prompt"},
+    "overlap_contamination": "Before sealing, compare exact bytes, normalized text and token/character n-gram fingerprints against all Phase 0 case/prompt material and each declared source benchmark; manually adjudicate likely paraphrases. Record hits, resolutions and benchmark/pretraining uncertainty. This cannot prove absence from model pretraining.",
+    "blind_route_gold": "Two independent adjudicators receive only policy version and permitted metadata, not prompts beyond what is necessary, router identity/decisions, or outcomes. They label independently; third blind adjudicator resolves disagreement. Preserve both labels, rationale and resolution. Unresolvable gold remains UNKNOWN.",
+    "blind_task_outcome": "Two reviewers independently score anonymized outputs using the frozen itemized rubric without router/system identity or route decision; third reviewer resolves disagreement. Preserve raw scores and resolution. A missing/corrupt system-attributable output is failure; otherwise UNKNOWN with reason.",
+    "unknown_handling": "Never coerce UNKNOWN. Route-gold UNKNOWN is excluded from decision-correctness denominator but remains in assigned/eligible flow counts. Outcome UNKNOWN is excluded from success denominator only when evidence is not attributable to the system; retain it in the flow table. Missing risk/sensitivity stays fail-closed and is not recoded safe.",
+    "unseal_authorization": "No unseal in this gate. Later release requires written independent Sol approval of the exact packet and a separate explicit execution authorization; all candidate, license, adapter, runner, executor, config, environment and budget gates must pass. Custodian records authorizer, scope, manifest commitment/digest, time and recipients."
+  },
+  "candidate_registry": [
+    {
+      "name": "Laya",
+      "role": "first local semantic feasibility candidate, conditional",
+      "canonical_repository": "https://github.com/NandhaKishorM/laya",
+      "source_commit": {"value": "1e28ac20c0896b1c37a744cd11f740eb98f8b178", "status": "VERIFIED", "evidence": "Exact-revision LICENSE fetch returned Apache License text; repository commit hash was the preregistered immutable source candidate."},
+      "candidate_checkpoint": "convaiinnovations/laya-multilingual",
+      "checkpoint_revision": {"value": "82d57fc4f2d1be3d2caac494045f2ec51d0842f3", "status": "VERIFIED", "evidence": "Hugging Face model revision API returned the requested exact SHA and cardData license apache-2.0."},
+      "checkpoint_size": {"value": "647 MB upstream-reported; exact byte count and file digest NOT_TESTED", "status": "UPSTREAM_CLAIM"},
+      "code_license": {"value": "Apache-2.0", "status": "VERIFIED", "evidence": "LICENSE at exact source commit."},
+      "model_license": {"value": "Apache-2.0", "status": "VERIFIED", "evidence": "Hub cardData at exact revision; full legal/redistribution terms still require review."},
+      "external_dependencies": {"value": "PyTorch, Transformers, tokenizer/runtime dependencies; exact lock not generated", "status": "UPSTREAM_CLAIM"},
+      "offline_feasibility": {"value": "Model can only be assessed offline after exact-revision files and dependencies are cached; end-to-end offline load NOT_TESTED", "status": "NOT_TESTED"},
+      "hardware": {"cpu": "CPU-only inference is technically proposed but NOT_TESTED; available 12 vCPU", "gpu": "Optional CUDA; RTX 2060 has 6 GiB VRAM, not approved/assumed for run"},
+      "chinese_support": {"value": "Hub card describes 100+ languages and lists Chinese; task-specific routing quality UNKNOWN", "status": "UPSTREAM_CLAIM"},
+      "adapter_status": "NOT_TESTED; not implemented. Must take exact checkpoint_revision as a required immutable constructor/config value and fail closed unless runtime-reported model commit equals it. Floating aliases are forbidden.",
+      "eligibility": "CONDITIONAL_NOT_YET_ELIGIBLE_FOR_EXECUTION"
+    },
+    {
+      "name": "RouteLLM",
+      "role": "conditional candidate; current intended route is excluded",
+      "canonical_repository": "https://github.com/lm-sys/RouteLLM",
+      "source_commit": {"value": "0b64fdafe049e596a3f5657c219329f24af24198", "status": "VERIFIED", "evidence": "Exact-revision LICENSE fetch returned Apache License text; this is the preregistered source candidate."},
+      "candidate_checkpoint": "NONE_SELECTED",
+      "checkpoint_revision": {"value": "UNKNOWN", "status": "UNKNOWN"},
+      "checkpoint_size": {"value": "UNKNOWN; no exact router/model-pair artifacts selected", "status": "UNKNOWN"},
+      "code_license": {"value": "Apache-2.0", "status": "VERIFIED", "evidence": "LICENSE at exact source commit."},
+      "model_license": {"value": "UNKNOWN; every router checkpoint and strong/weak executor model needs separate exact revision and license review", "status": "UNKNOWN"},
+      "external_dependencies": {"value": "Current mf/similarity path invokes OpenAI text-embedding-3-small; router service/model-pair endpoints also require configuration", "status": "VERIFIED"},
+      "offline_feasibility": {"value": "Current intended path is not offline and has no qualified local embedding replacement", "status": "NOT_ELIGIBLE"},
+      "hardware": {"cpu": "UNKNOWN for complete pinned configuration", "gpu": "UNKNOWN for complete pinned configuration"},
+      "chinese_support": {"value": "UNKNOWN for proposed router and fixed pair", "status": "UNKNOWN"},
+      "adapter_status": "NOT_TESTED; no model pair or API-free local embedding path selected.",
+      "eligibility": "NOT_ELIGIBLE_FOR_CURRENT_PHASE_ZERO_PAID_API_BUDGET"
+    },
+    {
+      "name": "vLLM Semantic Router",
+      "role": "optional reference; excluded unless later evidence justifies it",
+      "canonical_repository": "https://github.com/vllm-project/semantic-router",
+      "source_commit": {"value": "3448de83f093f2108505cf2902a0602de8929d20", "status": "VERIFIED", "evidence": "Exact-revision LICENSE fetch returned Apache License text; preregistered source candidate."},
+      "candidate_checkpoint": "NONE_SELECTED",
+      "checkpoint_revision": {"value": "UNKNOWN", "status": "UNKNOWN"},
+      "checkpoint_size": {"value": "UNKNOWN", "status": "UNKNOWN"},
+      "code_license": {"value": "Apache-2.0", "status": "VERIFIED", "evidence": "LICENSE at exact source commit."},
+      "model_license": {"value": "UNKNOWN until an exact recipe and all model assets are selected", "status": "UNKNOWN"},
+      "external_dependencies": {"value": "Full gateway/data-plane deployment and recipe-specific model/runtime dependencies", "status": "UPSTREAM_CLAIM"},
+      "offline_feasibility": {"value": "No exact local recipe selected; complete offline feasibility NOT_TESTED", "status": "NOT_TESTED"},
+      "hardware": {"cpu": "Upstream has CPU paths; exact recipe resource need UNKNOWN", "gpu": "Recipe dependent; UNKNOWN"},
+      "chinese_support": {"value": "UNKNOWN for any specific unselected recipe", "status": "UNKNOWN"},
+      "adapter_status": "NOT_TESTED; full gateway/wire adapter not implemented.",
+      "eligibility": "OPTIONAL_NOT_SELECTED_NOT_ELIGIBLE_FOR_CURRENT_EXECUTION"
+    }
+  ],
+  "adapter_runner_executor_identity": {
+    "architecture": ["RoutingContract", "Adapter", "Candidate engine", "DecisionReceipt"],
+    "end_to_end_architecture": ["Router", "Adapter", "Executor", "OutcomeReceipt"],
+    "routing_contract": "Canonical UTF-8 JSON request validated against routing-v0 semantics; adapter capability declaration lists accepted fields and rejects unsupported/missing required fields. Controlled requests never contain task text.",
+    "adapter_interface": "predict(request: RoutingRequest, *, candidate_ref: ExactCandidateRef, config_ref: ConfigRef) -> DecisionReceipt; every returned target must be checked by the deterministic policy guard against risk, confidentiality, opt-in and available_targets.",
+    "adapter_identity": "Not implemented. Before any run record adapter semantic version, source git commit, adapter source-tree SHA-256, interface version and dependency-lock digest. Laya constructor must require the exact checkpoint repository and revision; mismatch aborts before inference.",
+    "runner_identity": "Not implemented. Before a run record runner version, source git commit, source-tree SHA-256, CLI invocation, case-order digest and receipt schema version.",
+    "executor_identity": "No executor selected. Before End-to-End work record executor implementation/version, exact model repository/revision, separate license, decoding/config, local endpoint identity and output contract. No executor may be silently substituted.",
+    "config_identity": "Canonical JSON config digest, policy/rules version, adapter settings, thresholds if any, model-pair mapping and execution limits; thresholds require separate justification/review.",
+    "receipt_required_fields": ["receipt_schema_version", "track", "case_id", "input_digest", "router_input_digest", "source_commit", "checkpoint_repository", "checkpoint_revision", "adapter_version", "adapter_source_commit", "adapter_tree_digest", "runner_version", "runner_source_commit", "executor_identity_or_NONE", "config_digest", "environment_digest", "started_at_utc", "completed_at_utc", "decision_or_outcome", "status_or_failure_class", "fallback_attempts", "network_access_mode"],
+    "environment_identity": "Canonical digest over OS/WSL identity, Python implementation/version, lockfile digest, installed package inventory, CPU/RAM/GPU/driver, environment variables affecting execution, network mode and cache identity. Secrets are never included."
+  },
+  "environment_plan": {
+    "probes_run_utc_date": "2026-09-24",
+    "python": "Python 3.12.3; no isolated experiment environment or dependency lock exists yet.",
+    "lock_strategy": "Create a dedicated CPU-first Python 3.12 environment only after approval. Pin transitive dependencies with uv.lock (or requirements lock with hashes); record Python implementation and platform markers; retain a local wheelhouse/cache manifest and SHA-256. Do not install dependencies in this gate.",
+    "wsl": {"identity": "Linux PZY 6.18.33.1-microsoft-standard-WSL2 x86_64", "effective_limits": "Visible 12 vCPU, 15 GiB RAM, 4 GiB swap, 1007 GiB filesystem with 891 GiB available. Cgroup v2 memory.max/cpu.max paths were absent; WSL configuration/host-level limits remain UNKNOWN."},
+    "cpu": "Intel Core i7-10750H; 6 cores / 12 threads visible.",
+    "ram": "15 GiB total, about 12 GiB available at probe time; probe-time state only.",
+    "gpu": "NVIDIA GeForce RTX 2060, 6144 MiB VRAM; 549 MiB in use at probe time. nvidia-smi reports driver 596.36, CUDA 13.2, utility 595.71.01.",
+    "disk": "Current filesystem /dev/sdd: 1007 GiB total, 66 GiB used, 891 GiB available at probe time.",
+    "network_policy": "Gate: no model or dependency downloads, paid calls, or inference. Later feasibility run defaults to network denied after explicitly approved exact-revision assets/dependencies are staged; no runtime telemetry/provider calls. Any required undeclared network access stops candidate.",
+    "offline_cache_policy": "Cache only approved immutable checkpoint revision and hash-locked dependencies. Record cache manifest and byte totals; disable dynamic revision resolution and outbound networking for execution. No cache population in this gate."
+  },
+  "resource_budget": {
+    "paid_api_budget": 0,
+    "MAX_MODEL_DOWNLOAD_COUNT": {"proposed": 1, "approved": false, "basis": "One Laya multilingual checkpoint revision only; do not download RouteLLM or vLLM assets."},
+    "MAX_MODEL_DOWNLOAD_BYTES": {"proposed": 750000000, "unit": "bytes", "approved": false, "basis": "Laya Hub reports 647 MB at upstream; allow modest metadata/shard variance while bounding one checkpoint. Exact bytes must be read from revision metadata before authorization."},
+    "MAX_DISK_USAGE": {"proposed": 8589934592, "unit": "bytes", "approved": false, "basis": "8 GiB total Stage B experiment footprint, including model, CPU dependencies, cache, logs and temporary files; small relative to 891 GiB currently available and intended only for one feasibility candidate."},
+    "MAX_WALL_CLOCK": {"proposed": 7200, "unit": "seconds", "approved": false, "basis": "Two hours total for one bounded install/load/adapter feasibility session; no benchmark sweep."},
+    "MAX_FULL_BENCHMARK_RERUNS": {"proposed": 0, "approved": false, "basis": "Stage B target is feasibility only; a formal full benchmark is outside this packet and requires new review."},
+    "MAX_FEASIBILITY_CASES": {"proposed": 6, "approved": false, "basis": "At most six existing public Phase 0 dev cases for adapter plumbing only; not a sample-size claim, heldout set, or performance pilot result."},
+    "USER_APPROVAL_REQUIRED": ["Approve or revise each proposed positive resource cap before any model/dependency download or candidate execution.", "Approve exact Laya artifact byte count and CPU-only/GPU policy after immutable revision metadata and lock plan are reviewed.", "Approve whether a six-case public-dev feasibility smoke is within the later Stage B authorization; it must remain non-inferential and not be presented as performance evidence.", "Appoint named HELDOUT_CUSTODIAN and data owner; approve population, exact strata quotas/sample frame/rights, and formal sample size before any heldout generation.", "Sol High must choose either a fully justified formal inferential design or keep all results descriptive; set no margin/threshold without evidence."],
+    "budget_state": "PROPOSED_NOT_APPROVED; EXECUTION_AUTHORIZED remains false"
+  },
+  "stop_conditions": [
+    {"condition": "heldout leakage or unauthorized access", "action": "Stop all affected work, preserve access logs, retire exposed heldout version from confirmatory use, and return for independent review."},
+    {"condition": "candidate/source/checkpoint/license mismatch or incomplete license grant", "action": "Stop before loading or execution; quarantine the candidate and review exact identity and rights."},
+    {"condition": "checkpoint identity mismatch, missing revision, mutable alias, or receipt identity inconsistency", "action": "Abort before inference, invalidate affected receipts, and review. No latest/main/floating reference is acceptable."},
+    {"condition": "unexpected paid API, outbound network dependency, telemetry, or non-zero charge", "action": "Stop immediately, disable network, preserve logs, and review; paid API budget is zero."},
+    {"condition": "policy invariant break: confidential-to-cloud, unavailable target, or unknown/high-risk fail-open", "action": "Stop affected run immediately; do not offset with quality metrics."},
+    {"condition": "environment incompatibility or unpinned dependency", "action": "Stop candidate after one bounded repair; environment/config changes require review before retry."},
+    {"condition": "resource count/bytes/disk/wall-clock/case/rerun budget exceeded", "action": "Stop immediately and preserve partial receipts; no automatic cap increase."},
+    {"condition": "same root cause recurs after one bounded repair", "action": "Stop that candidate and return to review; maximum one repair for a root cause, no reset by renaming the issue."},
+    {"condition": "unexpected network or dependency paid route", "action": "Stop before request; no paid or remote fallback."}
+  ],
+  "unresolved_items": ["Formal inferential design and formal sample size are NOT_YET_JUSTIFIED.", "Heldout population source frame, quotas, sample count, exact rights and named custodian/data owner need approval; no heldout exists.", "Laya checkpoint exact artifact bytes/hash, adapter implementation, CPU load, offline execution, Chinese task support and executor are NOT_TESTED.", "RouteLLM remains NOT_ELIGIBLE_FOR_CURRENT_PHASE because its intended embedding path requires paid OpenAI access and no local alternative is qualified.", "All positive resource caps are proposals requiring Sol High approval.", "Stage B requires a separate explicit authorization after independent review."]
+}
